@@ -24,14 +24,12 @@ body {
     flex-direction: column;
 }
 
-/* Animated Background */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Header */
 header {
     padding: 25px;
     font-size: 24px;
@@ -42,7 +40,6 @@ header {
     border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Center Card */
 .container {
     flex: 1;
     display: flex;
@@ -64,7 +61,6 @@ header {
     gap: 25px;
 }
 
-/* Buttons */
 .btn {
     padding: 15px;
     border-radius: 10px;
@@ -99,7 +95,6 @@ header {
     box-shadow: 0 0 20px rgba(0, 114, 255, 0.6);
 }
 
-/* Mobile */
 @media (max-width: 480px) {
     .card {
         width: 90%;
@@ -120,9 +115,9 @@ header {
 
 <div class="container">
     <div class="card">
-        <button class="btn">Monitor</button>
-        <button class="btn">Logs</button>
-        <button class="btn">Intelli</button>
+        <button class="btn" onclick="location.href='monitor.html'">Monitor</button>
+        <button class="btn" onclick="location.href='logs.html'">Logs</button>
+        <button class="btn" onclick="location.href='intelli.html'">Intelli</button>
     </div>
 </div>
 
