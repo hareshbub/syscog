@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSCOG - Monitor</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(-45deg, #0f0f1a, #141428, #1c1c3c, #101020);
+    background-size:400% 400%;
+    animation: gradientMove 12s ease infinite;
+    color:white;
+    display:flex;
+    flex-direction:column;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+header{
+    padding:20px 25px;
+    font-size:22px;
+    letter-spacing:3px;
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header a{
+    color:#00c6ff;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    flex:1;
+    padding:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.grid{
+    width:100%;
+    max-width:900px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.cell{
+    position:relative;
+    padding:20px;
+    border-radius:14px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    transition:0.3s ease;
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.cell:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 20px rgba(0,114,255,0.4);
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    position:absolute;
+    top:15px;
+    right:15px;
+}
+
+.green{background:#00ff88;}
+.yellow{background:#ffc107;}
+.red{background:#ff4d4d;}
+
+.title{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.basic{
+    font-size:14px;
+    opacity:0.8;
+}
+
+/* Hidden hover details */
+.details{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    opacity:0;
+    transition:0.3s ease;
+    font-size:14px;
+}
+
+.cell:hover .details{
+    opacity:1;
+}
+
+/* Mobile */
+@media(max-width:768px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:480px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    SYSCOG MONITOR
+    <a href="index.html">← Back</a>
+</header>
+
+<div class="container">
+    <div class="grid" id="grid"></div>
+</div>
+
+<script>
+const grid = document.getElementById("grid");
+
+function randomStatus(){
+    const r = Math.random();
+    if(r < 0.7) return "green";
+    if(r < 0.9) return "yellow";
+    return "red";
+}
+
+function createCell(id){
+    const status = randomStatus();
+    const load = (Math.random()*100).toFixed(1);
+    const temp = (20 + Math.random()*80).toFixed(1);
+
+    return `
+    <div class="cell">
+        <div class="status-dot ${status}"></div>
+        <div class="title">Robot ${id}</div>
+        <div class="basic">Load: ${load}%</div>
+
+        <div class="details">
+            <div><strong>Robot ${id}</strong></div>
+            <div>Status: ${status.toUpperCase()}</div>
+            <div>Load: ${load}%</div>
+            <div>Temperature: ${temp}°C</div>
+            <div>Voltage: ${(200 + Math.random()*20).toFixed(1)}V</div>
+        </div>
+    </div>
+    `;
+}
+
+function renderGrid(){
+    grid.innerHTML = "";
+    for(let i=1;i<=16;i++){
+        grid.innerHTML += createCell(i);
+    }
+}
+
+renderGrid();
+setInterval(renderGrid, 4000); // refresh every 4 seconds
+</script>
+
+</body>
+</html>
