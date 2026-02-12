@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSCOG - Logs</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(-45deg, #0f0f1a, #141428, #1c1c3c, #101020);
+    background-size:400% 400%;
+    animation: gradientMove 12s ease infinite;
+    color:white;
+    display:flex;
+    flex-direction:column;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+header{
+    padding:20px 25px;
+    font-size:22px;
+    letter-spacing:3px;
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header a{
+    color:#00c6ff;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    flex:1;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.log-entry{
+    padding:15px 18px;
+    margin-bottom:12px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    transition:0.3s ease;
+    font-size:14px;
+}
+
+.log-entry:hover{
+    transform:translateX(5px);
+    box-shadow:0 0 15px rgba(0,114,255,0.3);
+}
+
+.time{
+    font-size:12px;
+    opacity:0.6;
+}
+
+.info{border-left:4px solid #00c6ff;}
+.warning{border-left:4px solid #ffc107;}
+.critical{border-left:4px solid #ff4d4d;}
+
+@media(max-width:480px){
+    header{
+        font-size:18px;
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    SYSCOG LOGS
+    <a href="index.html">← Back</a>
+</header>
+
+<div class="container" id="logContainer">
+</div>
+
+<script>
+const container = document.getElementById("logContainer");
+
+function randomLog(){
+    const types = ["info","warning","critical"];
+    const messages = [
+        "Temperature deviation detected",
+        "Load spike observed",
+        "Voltage fluctuation detected",
+        "Routine diagnostic completed",
+        "Predictive anomaly pattern recognized",
+        "Cooling system efficiency drop"
+    ];
+
+    const type = types[Math.floor(Math.random()*types.length)];
+    const robot = Math.floor(Math.random()*16) + 1;
+    const message = messages[Math.floor(Math.random()*messages.length)];
+    const now = new Date().toLocaleTimeString();
+
+    const log = document.createElement("div");
+    log.className = `log-entry ${type}`;
+    log.innerHTML = `
+        <div><strong>Robot ${robot}</strong> — ${message}</div>
+        <div class="time">${now} | ${type.toUpperCase()}</div>
+    `;
+
+    container.prepend(log);
+
+    // Limit to 100 logs to prevent overload
+    if(container.children.length > 100){
+        container.removeChild(container.lastChild);
+    }
+}
+
+// Initial logs
+for(let i=0;i<10;i++){
+    randomLog();
+}
+
+// Generate new logs every 2 seconds
+setInterval(randomLog,2000);
+</script>
+
+</body>
+</html>
