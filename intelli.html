@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSCOG - Intelli</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(-45deg, #0f0f1a, #141428, #1c1c3c, #101020);
+    background-size:400% 400%;
+    animation: gradientMove 12s ease infinite;
+    color:white;
+    display:flex;
+    flex-direction:column;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+header{
+    padding:20px 25px;
+    font-size:22px;
+    letter-spacing:3px;
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header a{
+    color:#00c6ff;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    flex:1;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+}
+
+.btn{
+    padding:14px 24px;
+    border-radius:10px;
+    border:none;
+    font-size:15px;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    transition:0.3s ease;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 20px rgba(0,114,255,0.6);
+}
+
+.report{
+    width:100%;
+    max-width:800px;
+    padding:25px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    display:none;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.section{
+    margin-bottom:15px;
+}
+
+.section strong{
+    color:#00c6ff;
+}
+
+@media(max-width:480px){
+    header{
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    SYSCOG INTELLI
+    <a href="index.html">← Back</a>
+</header>
+
+<div class="container">
+
+    <button class="btn" onclick="generateReport()">Generate AI Report</button>
+
+    <div class="report" id="reportBox"></div>
+
+</div>
+
+<script>
+function generateReport(){
+    const reportBox = document.getElementById("reportBox");
+
+    const anomalyCount = Math.floor(Math.random()*5)+1;
+    const efficiency = (90 + Math.random()*10).toFixed(2);
+    const riskScore = (Math.random()*100).toFixed(1);
+
+    reportBox.style.display = "block";
+    reportBox.innerHTML = `
+        <div class="section">
+            <strong>System Overview:</strong><br>
+            Total Units Monitored: 16<br>
+            Overall Efficiency: ${efficiency}%<br>
+            Risk Index: ${riskScore}/100
+        </div>
+
+        <div class="section">
+            <strong>Anomaly Detection:</strong><br>
+            ${anomalyCount} micro-deviation patterns detected.<br>
+            Most frequent deviation: Load fluctuation in Robot ${Math.floor(Math.random()*16)+1}.
+        </div>
+
+        <div class="section">
+            <strong>Predictive Insights:</strong><br>
+            Potential overheating risk detected in next 2–4 operational hours.<br>
+            Preventive maintenance recommended.
+        </div>
+
+        <div class="section">
+            <strong>Optimization Opportunity:</strong><br>
+            Task rebalancing can improve throughput by ${(Math.random()*5).toFixed(1)}%.<br>
+            Energy optimization possible through dynamic scheduling.
+        </div>
+
+        <div class="section">
+            <strong>AI Conclusion:</strong><br>
+            System is stable but shows early-stage deviation signals. 
+            Immediate intervention not required. Monitoring advised.
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
