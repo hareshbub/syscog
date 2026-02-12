@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSCOG</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        background: linear-gradient(135deg, #0f0f1a, #141428, #1a1a35);
+        color: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Header */
+    header {
+        padding: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    /* Main Container */
+    .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* Buttons */
+    .btn {
+        width: 220px;
+        padding: 14px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 114, 255, 0.6);
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 480px) {
+        .btn {
+            width: 90%;
+        }
+
+        header {
+            font-size: 18px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header>SYSCOG</header>
+
+<div class="container">
+    <button class="btn">Monitor</button>
+    <button class="btn">Logs</button>
+    <button class="btn">Intelli</button>
+</div>
+
+</body>
+</html>
